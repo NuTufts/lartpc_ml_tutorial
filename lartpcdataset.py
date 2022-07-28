@@ -19,7 +19,7 @@ class lartpcDataset( torchvision.datasets.DatasetFolder ):
             lartpcDataset.ADC_SCALE = adc_scale
 
     def load_data(inp):
-        print("lartpcDataset.load_data: path=",inp)
+        #print("lartpcDataset.load_data: path=",inp)
         with open(inp, 'rb') as f:
             npin = np.load(f)
             x = npin['arr_0']
