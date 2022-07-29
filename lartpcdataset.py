@@ -24,7 +24,7 @@ class lartpcDataset( torchvision.datasets.DatasetFolder ):
             npin = np.load(f)
             x = npin['arr_0']
             if lartpcDataset.NORM_AND_CLIP:
-                x = np.clip( x/lartpcDataset.ADC_SCALE, 0, 10.0 )
+                x = np.expand_dims( np.clip( x/lartpcDataset.ADC_SCALE, 0, 10.0 ), axis=0 )
         return x
 
 
