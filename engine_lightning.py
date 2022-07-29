@@ -6,7 +6,6 @@ from torch.utils.data import random_split
 from torchvision import transforms
 import resnet
 import pytorch_lightning as pl
-import wandb
 
 class LitEngineResNet(pl.LightningModule):
     def __init__(self,pretrained=False):
