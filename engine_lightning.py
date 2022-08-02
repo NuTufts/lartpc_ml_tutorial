@@ -8,13 +8,14 @@ import resnet
 import pytorch_lightning as pl
 
 class LitEngineResNet(pl.LightningModule):
-    def __init__(self,pretrained=False):
+    def __init__(self,pretrained=False,lr=2.0e-3):
         super().__init__()
         #self.wandb
         input_channels = 1
         if pretrained:
             # works on RGB images
             input_channels = 3
+        self.lr = lr
         self.model = resnet.resnet18( pretrained=pretrained,
                                       input_channels=input_channels,
                                       num_classes=5)
@@ -28,7 +29,7 @@ class LitEngineResNet(pl.LightningModule):
         return embedding
 
     def configure_optimizers(self):
-        optimizer = torch.optim.AdamW(self.parameters(), lr=1e-4)
+        optimizer = torch.optim.AdamW(self.parameters(), lr=self.lr)
         return optimizer
 
     def training_step(self, train_batch, batch_idx):
