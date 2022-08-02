@@ -20,7 +20,6 @@ def convert_rootfile( rootfile, out_folder="./" ):
     io.initialize()
     nentries = io.get_n_entries()
     print("Number of entries in file: ",nentries)
-
     
     # make output folders
     for view in VIEWS:
@@ -91,5 +90,6 @@ def convert_rootfile( rootfile, out_folder="./" ):
 
 if __name__ == "__main__":
 
-    convert_rootfile("train_50k.root")
+    #convert_rootfile("train_50k.root")
+    convert_rootfile("practice_test_5k.root",out_folder="./valid")    
     

@@ -13,8 +13,8 @@ DEVICE = torch.device("cuda")
 BATCHSIZE=64
 
 # data
-train_dataset = lartpcDataset( root="./data/" )
-valid_dataset = lartpcDataset( root="./valid/" )
+train_dataset = lartpcDataset( root="./data/z-view/" )
+valid_dataset = lartpcDataset( root="./valid/z-view/" )
 
 train_loader = torch.utils.data.DataLoader(
     dataset=train_dataset,
