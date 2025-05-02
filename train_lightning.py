@@ -5,6 +5,10 @@ import pytorch_lightning as pl
 from argparse import ArgumentParser
 from pytorch_lightning.loggers import WandbLogger
 
+# Setting the maximum of training epochs
+n_max_epochs = 10
+
+
 wandb_logger = WandbLogger(project='tutorial-resnet-lightning')
 
 DEVICE = torch.device("cuda")
@@ -12,7 +16,7 @@ DEVICE = torch.device("cuda")
 
 BATCHSIZE=64
 
-# data
+# Defining the training and validation datasets
 train_dataset = lartpcDataset( root="./data/z-view/" )
 valid_dataset = lartpcDataset( root="./valid/z-view/" )
 
@@ -45,8 +49,10 @@ if False:
     print(loss)
 
 # training
-trainer = pl.Trainer(gpus=1,
+trainer = pl.Trainer(accelerator="gpu",
+                     devices=1,
                      precision=16,
+                     max_epochs=n_max_epochs,
                      limit_train_batches=0.5,
                      logger=wandb_logger)
 trainer.fit(model, train_loader, val_loader)
