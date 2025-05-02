@@ -1,3 +1,9 @@
 *~
 *.pyc
 .ipynb_checkpoints
+workerCommand.txt
+data/*
+scripts/*
+valid/*
+wandb/*
+tutorial-resnet-lightning/*
