@@ -56,3 +56,5 @@ trainer = pl.Trainer(accelerator="gpu",
                      limit_train_batches=0.5,
                      logger=wandb_logger)
 trainer.fit(model, train_loader, val_loader)
+
+

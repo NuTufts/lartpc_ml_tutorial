@@ -7,6 +7,9 @@ from torchvision import transforms
 import resnet
 import pytorch_lightning as pl
 
+# Importing MixUp functionality
+from torchvision.transforms import v2
+
 class LitEngineResNet(pl.LightningModule):
     def __init__(self,pretrained=False,lr=2.0e-3):
         super().__init__()
@@ -20,6 +23,9 @@ class LitEngineResNet(pl.LightningModule):
                                       input_channels=input_channels,
                                       num_classes=5)
         self.loss_fn = torch.nn.CrossEntropyLoss()
+
+        # Applying MixUp
+        self.mixup = v2.MixUp(num_classes=5)
 
     def print_model(self):
         print(self.model)
@@ -35,6 +41,9 @@ class LitEngineResNet(pl.LightningModule):
     def training_step(self, train_batch, batch_idx):
         x, y = train_batch # data batch, labels
         z = self.model(x) 
+
+        # Applying MixUp to data
+        x, y = self.mixup(x, y)
 
         loss = self.calc_loss( z, y )
         self.log('train_loss', loss)
